@@ -1,9 +1,13 @@
+###Nommage selon la portée
 |préfixe|description|
 |-----|-----|
 |g_|globale|
 |s_|statique|
 |m_|membre (C++)|
-|is_ ou _has|fonction renvoie booléen (int en C)|
+
+###Nommage selon le type
+|préfixe|description|
+|-----|-----|
 |b_|booléen (int en C)|
 |c_|char|
 |i_|int|
@@ -21,10 +25,15 @@
 |pi_|int*|
 |pp_|void**|
 |ppi_|int**|
-|idx_|indice dans un tableau|
-|cb_|nombre d'octets|
 |st_|structure|
 |fn_|fonction|
 |ac_|char acList[10] non zero terminated|
 |ai_|int aiList[10]|
 |ast_|struct ast_mastruct_t[10]|
+
+###Nommage selon le contexte
+|préfixe|description|
+|-----|-----|
+|idx_|indice dans un tableau|
+|cb_|nombre d'octets|
+|is_ ou _has|fonction renvoie booléen (int en C)|
