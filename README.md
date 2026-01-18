@@ -36,4 +36,4 @@
 |-----|-----|
 |idx_|indice dans un tableau|
 |cb_|nombre d'octets|
-|is_ ou _has|fonction renvoie booléen (int en C)|
+|is_ ou has_|fonction renvoie booléen (int en C)|
