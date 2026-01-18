@@ -1,3 +1,5 @@
+|préfixe|description|
+|-----|-----|
 |g_|globale|
 |s_|statique|
 |m_|membre (C++)|
