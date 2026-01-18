@@ -113,7 +113,7 @@ int getIdxFromSocketfd(int sockfd, int aSockfd[], int sockfdLen)
 int main(int argc, char **argv)
 {
 
-    // -----------------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     int opt;
     char *pzPort = NULL;
     int sockfd;
@@ -161,7 +161,7 @@ int main(int argc, char **argv)
     }
 
     int n;
-    // -----------------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
 
 
     while((opt = getopt(argc,argv,"p:h"))!=-1)
@@ -249,7 +249,8 @@ int main(int argc, char **argv)
                 }
                 else // Un nouvel utilisateur se connecte
                 {
-                    printf("Ajout d'un nouvel utiisateur à l'emplacement %d\n", idx);
+                    printf("Ajout d'un nouvel utiisateur à l'emplacement %d\n",
+                             idx);
                     csockfd[idx] = newsock;
                     ev.data.fd = newsock;
                     ev.events = EPOLLIN;
@@ -294,7 +295,9 @@ int main(int argc, char **argv)
                         if(speakToIdx < USER_COUNT)
                         {
                             memset(buffer, 0, BUFFER_SIZE);
-                            nBytes = snprintf(buffer, BUFFER_SIZE, "Vous parlez maintenant à %s\n", atUserInfo[speakToIdx].username);
+                            nBytes = snprintf(buffer, BUFFER_SIZE,
+                                                "Vous parlez maintenant à %s\n",
+                                                atUserInfo[speakToIdx].username);
                             atUserInfo[idx].speakto = speakToIdx;
                             send(csockfd[idx],buffer,nBytes,0);
                         }
