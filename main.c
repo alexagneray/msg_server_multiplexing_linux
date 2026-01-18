@@ -36,7 +36,7 @@ typedef struct
  * @param tabSize 
  * @return int 
  */
-int findEmptySlot(int tab[], unsigned int tabSize)
+int find_empty_slot(int tab[], unsigned int tabSize)
 {
     for(unsigned int i=0;i<tabSize;++i)
     {
@@ -51,13 +51,13 @@ int findEmptySlot(int tab[], unsigned int tabSize)
 /**
  * @brief Génère un string contenant la liste des utilisateurs actifs. 
  * La fonction alloue dynamiquement et mets à jour le pointeur ppzUserList.
- * La mémoire allouée devra être libérée avec freeUserListString()
+ * La mémoire allouée devra être libérée avec free_user_list_string()
  * 
  * @param atUserInfo 
  * @param nUserInfoLen 
  * @param ppzUserList 
  */
-int getUserListString(user_info_t atUserInfo[], unsigned int nUserInfoLen, char **ppzUserList)
+int get_user_list_string(user_info_t atUserInfo[], unsigned int nUserInfoLen, char **ppzUserList)
 {
     const unsigned int USER_LABEL_SIZE = USERID_LEN + USERNAME_LEN + 3; // userid - USERNAME
     *ppzUserList = malloc(USER_LABEL_SIZE * nUserInfoLen);
@@ -74,12 +74,12 @@ int getUserListString(user_info_t atUserInfo[], unsigned int nUserInfoLen, char 
 
 /**
  * @brief Libère la mémoire allouée pour la liste des utilisateurs.
- * Cette fonction doit impérativement être appelée avec getUserListString
+ * Cette fonction doit impérativement être appelée avec get_user_list_string
  * pour libérer la mémoire allouée dynamiquement !
  * 
  * @param ppzUserList 
  */
-void freeUserListString(char **ppzUserList)
+void free_user_list_string(char **ppzUserList)
 {
     if(*ppzUserList)
     {
@@ -97,7 +97,7 @@ void freeUserListString(char **ppzUserList)
  * @param sockfdLen taille de la liste 
  * @return int 
  */
-int getIdxFromSocketfd(int sockfd, int aSockfd[], int sockfdLen)
+int get_idx_from_sockfd(int sockfd, int aSockfd[], int sockfdLen)
 {
     for(int i=0; i<sockfdLen;++i)
     {
@@ -239,7 +239,7 @@ int main(int argc, char **argv)
                 printf("Un nouvel utiisateur veut se connecter !\n");
                 int newsock;
                 newsock = accept(sockfd,&cltSockAddr,&cltSockAddrLen);
-                int idx = findEmptySlot(csockfd, USER_COUNT);
+                int idx = find_empty_slot(csockfd, USER_COUNT);
                 if(idx==-1) // Il n'y a plus de slot dispo, on ferme la connexion
                 {
                     close(newsock);
@@ -268,7 +268,7 @@ int main(int argc, char **argv)
                 }
                 printf("%lu octets recus\n", nBytes);
 
-                int idx = getIdxFromSocketfd(events[i].data.fd, csockfd, USER_COUNT);
+                int idx = get_idx_from_sockfd(events[i].data.fd, csockfd, USER_COUNT);
 
                 if(!atUserInfo[idx].authentified) // authentification
                 {
@@ -277,9 +277,9 @@ int main(int argc, char **argv)
                     atUserInfo[idx].speakto = -1;
                     char *pzUserList;
                     int nUserListLen = 0;
-                    nUserListLen = getUserListString(atUserInfo, USER_COUNT, &pzUserList);
+                    nUserListLen = get_user_list_string(atUserInfo, USER_COUNT, &pzUserList);
                     send(events[i].data.fd, pzUserList, nUserListLen,0);
-                    freeUserListString(&pzUserList);
+                    free_user_list_string(&pzUserList);
                 }
                 else if(atUserInfo[idx].authentified &&
                     atUserInfo[idx].speakto == -1) // connexion à un autre user
