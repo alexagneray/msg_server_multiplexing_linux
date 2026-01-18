@@ -20,13 +20,13 @@
 #define USER_WELCOME_MSG_LEN sizeof(USER_WELCOME_MSG)
 
 
-typedef struct UserInfo
+typedef struct
 {
     int used; // 0 si inutilisé, 1 si user actif
     int authentified; // 0 si non authentifié, 1 si authentifié
     char username[USERNAME_LEN];
     int speakto; // indice de l'interlocuteur
-} UserInfo;
+} user_info_t;
 
 /**
  * @brief Renvoie l'indice de la première valeur -1 du tableau.
@@ -57,7 +57,7 @@ int findEmptySlot(int tab[], unsigned int tabSize)
  * @param nUserInfoLen 
  * @param ppzUserList 
  */
-int getUserListString(struct UserInfo atUserInfo[], unsigned int nUserInfoLen, char **ppzUserList)
+int getUserListString(user_info_t atUserInfo[], unsigned int nUserInfoLen, char **ppzUserList)
 {
     const unsigned int USER_LABEL_SIZE = USERID_LEN + USERNAME_LEN + 3; // userid - USERNAME
     *ppzUserList = malloc(USER_LABEL_SIZE * nUserInfoLen);
@@ -132,11 +132,8 @@ int main(int argc, char **argv)
         csockfd[i] = -1;
     }
 
-    struct UserInfo atUserInfo[USER_COUNT];
+    user_info_t atUserInfo[USER_COUNT];
     memset(atUserInfo, 0, sizeof(atUserInfo));
-
-    struct UserInMail* atUserInMail[USER_COUNT];
-    memset(atUserInMail, 0, sizeof(atUserInMail));
     
 
     struct epoll_event ev;
@@ -254,7 +251,7 @@ int main(int argc, char **argv)
                     csockfd[idx] = newsock;
                     ev.data.fd = newsock;
                     ev.events = EPOLLIN;
-                    memset(atUserInfo + idx,0,sizeof(struct UserInfo));
+                    memset(atUserInfo + idx,0,sizeof(user_info_t));
                     atUserInfo[idx].used = 1;
                     epoll_ctl(epfd, EPOLL_CTL_ADD, csockfd[idx], &ev);
 
