@@ -5,8 +5,14 @@
   "mounts": ["source=${localWorkspaceFolder},target=/workspace,type=bind"],
   "workspaceFolder": "/workspace",
   "customizations": {
-    "terminal.integrated.shell.linux": "/bin/bash",
-    "cmake.configureOnOpen": true
-  },
-  "postCreateCommand": "cmake --version"
+      "vscode": {
+        "extensions": [
+          "ms-vscode.cpptools",
+          "ms-vscode.cmake-tools" ,
+          "ms-vscode.cpptools-extension-pack"
+        ]
+      }
+    },
+  "postCreateCommand": "cmake --version",
+  
 }
