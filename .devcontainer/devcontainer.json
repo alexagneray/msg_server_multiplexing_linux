@@ -1,0 +1,12 @@
+{
+  "name": "Devcontainer CMake",
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "devcontainer",
+  "mounts": ["source=${localWorkspaceFolder},target=/workspace,type=bind"],
+  "workspaceFolder": "/workspace",
+  "customizations": {
+    "terminal.integrated.shell.linux": "/bin/bash",
+    "cmake.configureOnOpen": true
+  },
+  "postCreateCommand": "cmake --version"
+}

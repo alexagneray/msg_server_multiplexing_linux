@@ -1,0 +1,30 @@
+services:
+  devcontainer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ".:/workspace:cached"
+    working_dir: /workspace
+    tty: true
+    stdin_open: true
+    networks:
+      mon_reseau:
+        ipv4_address: 192.168.100.10
+
+  telnet_service:
+    build:
+      context: .
+      dockerfile: Dockerfile.telnet
+    tty: true
+    stdin_open: true
+    networks:
+      mon_reseau:
+        ipv4_address: 192.168.100.20
+
+networks:
+  mon_reseau:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.100.0/24
