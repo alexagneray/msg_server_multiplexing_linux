@@ -1,10 +1,10 @@
+#include "sockutils.h"
+
 #include <stdlib.h>
 
 #include <assert.h>
 
 #include <unistd.h>
-#include <sys/types.h>
-#include <sys/socket.h>
 #include <sys/epoll.h>
 #include <netdb.h>
 
@@ -13,42 +13,12 @@
 
 #include <fcntl.h>
 
-#define USERID_LEN 4
-#define USERNAME_LEN 64
-#define USERMSG_MAXLEN 4096
-#define SRVMSG_MAXLEN 8192
-
-#define USER_WELCOME_MSG "Bienvenue sur le serveur de discussion, quel est votre nom ?\n"
-#define USER_WELCOME_MSG_LEN sizeof(USER_WELCOME_MSG)
 
 
-typedef struct
-{
-    int b_used; // 0 si inutilisé, 1 si user actif
-    int b_authentified; // 0 si non authentifié, 1 si authentifié
-    char ac_username[USERNAME_LEN];
-    int idx_speakto; // indice de l'interlocuteur
-} user_info_t;
 
-/**
- * @brief Renvoie l'indice de la première valeur -1 du tableau.
- * Renvoie -1 si la valeur -1 n'est pas dans le tableau
- * 
- * @param ac_tocheck 
- * @param u_tab_size 
- * @return int 
- */
-int find_empty_slot(int ac_tocheck[], unsigned int u_tab_size)
-{
-    for(unsigned int i=0;i<u_tab_size;++i)
-    {
-        if(ac_tocheck[i]==-1)
-        {
-            return i;
-        }
-    }
-    return -1;
-}
+
+
+
 
 /**
  * @brief Génère un string contenant la liste des utilisateurs actifs. 
@@ -125,16 +95,16 @@ int main(int argc, char **argv)
 {
 
     // ------------------------------------------------------------------------
-    int i_opt;
-    char *pz_port = NULL;
-    int fd_sock;
-    int i_err;
+    // int i_opt;
+    // char *pz_port = NULL;
+    // int fd_sock;
+    // int i_err;
 
-    struct addrinfo t_hints;
-    struct addrinfo *pt_res;
+    // struct addrinfo t_hints;
+    // struct addrinfo *pt_res;
 
-    struct sockaddr t_client_sockaddr;
-    socklen_t cnt_client_sockaddr;
+    // struct sockaddr t_client_sockaddr;
+    // socklen_t cnt_client_sockaddr;
 
     const unsigned int USER_COUNT = 10;
     int afd_user_sock[USER_COUNT];

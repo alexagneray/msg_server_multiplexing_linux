@@ -3,8 +3,9 @@ project(MsgServerMultiplexingLinux VERSION 0.1.0)
 
 enable_testing()
 
-add_executable(MsgServer main.c)
+# add_executable(MsgServer main.c sockutils.c srvcore.c)
+add_library(SockUtils sockutils.c srvcore.c)
 
-target_compile_options(MsgServer PRIVATE -Wall -Wextra -Werror -Wpedantic)
+# target_compile_options(MsgServer PRIVATE -Wall -Wextra -Werror -Wpedantic)
 
 
