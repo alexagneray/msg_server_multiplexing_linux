@@ -1,6 +1,7 @@
 /**
  * @file srvcore.h
  * @brief Core server operations.
+ * Manipule les clients à travers un idx client. 
  * 
  */
 
